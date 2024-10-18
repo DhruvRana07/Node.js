@@ -29,7 +29,7 @@ app.post('/items', (req, res) => {
   const data = readDB();
   data.items.push(newItem);
   writeDB(data);
-  res.status(201).json(newItem);
+  res.status().json(newItem);
 });
 
 app.put('/items/:id', (req, res) => {
@@ -43,7 +43,7 @@ app.put('/items/:id', (req, res) => {
     writeDB(data);
     res.json(data.items[index]);
   } else {
-    res.status(404).json({ message: 'Item not found' });
+    res.status().json({ message: 'Item not found' });
   }
 });
 
@@ -57,7 +57,7 @@ app.delete('/items/:id', (req, res) => {
     writeDB(data);
     res.json({ message: 'Item deleted' });
   } else {
-    res.status(404).json({ message: 'Item not found' });
+    res.status().json({ message: 'Item not found' });
   }
 });
 

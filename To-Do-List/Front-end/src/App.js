@@ -16,7 +16,8 @@ function App() {
   }, []);
 
   const addItem = () => {
-    axios.post('http://localhost:3000/items', newItem)
+    const itemToAdd = { ...newItem, id: Number(newItem.id) };
+    axios.post('http://localhost:3000/items', itemToAdd)
       .then(response => {
         setItems([...items, response.data]);
         setNewItem({ id: '', name: '', description: '' });
@@ -53,7 +54,7 @@ function App() {
       <h1>CRUD App</h1>
       <div>
         <input
-          type="text"
+          type="number"
           value={newItem.id}
           placeholder="ID"
           onChange={e => setNewItem({ ...newItem, id: e.target.value })}
@@ -78,7 +79,20 @@ function App() {
             <strong>ID:</strong> {item.id} <br />
             <strong>Name:</strong> {item.name} <br />
             <strong>Description:</strong> {item.description} <br />
-            <button onClick={() => deleteItem(item.id)}>Delete</button>
+            <button 
+              onClick={() => deleteItem(item.id)} 
+              style={{
+                backgroundColor: '#d9534f', 
+                color: 'white', 
+                padding: '10px 15px', 
+                margin: '5px', 
+                border: 'none', 
+                borderRadius: '5px', 
+                cursor: 'pointer'
+              }}
+            >
+              Delete
+            </button>
             <button onClick={() => updateItem(item.id)}>Update</button>
           </li>
         ))}
