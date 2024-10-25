@@ -5,10 +5,8 @@ const app = express();
 require("dotenv").config();
 app.use(express.json());
 app.use(cors());
-// CONNECT with db
 connectDb();
 
-// use Route
 const bookRoutes = require("./routes/bookRoutes");
 app.use("/book", bookRoutes);
 const PORT = process.env.PORT || 5000;
